@@ -3,6 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"
+        integrity="sha512-VZ6m0F78+yo3sbu48gElK4irv2dzPoep8oo9LEjxviigcnnnNvnTOJRSrIhuFk68FMLOpiNz+T77nNY89rnWDg=="
+        crossorigin="anonymous"
+        >
+        </script>
 
         <link rel="stylesheet" href="assets/css/styles.css">
 
@@ -337,18 +342,20 @@
                     <!-- need to add contact details -->
                     <div class="contact__details">
             
-
                     </div>
-
-
-
-
-                    <form action="" class="contact__form">
-                        <input type="text" placeholder="Name" class="contact__input">
-                        <input type="mail" placeholder="Email" class="contact__input">
-                        <textarea name="" id="" cols="0" rows="10" class="contact__input"></textarea>
-                        <input type="button" value="Enter" class="contact__button button">
-                    </form>
+                    <form id="form" class="contact__form">
+                        <input type="text"  placeholder="Name" name="name" class="contact__input" required  />
+                        <input type="email" name="id" placeholder="Email"class="contact__input" required/>
+                        <textarea name="comments" type="text" placeholder="Something about You...." cols="0" rows="10" class="contact__input" required></textarea>
+                        <!-- <input type="text" name="comments" required  /> -->
+                        <input type="submit" value="submit" class="contact__button button" />
+                      </form>
+                    <!-- <form class="contact__form" id="form" >
+                        <input type="text" placeholder="Name" class="contact__input" required>
+                        <input type="email" placeholder="Email" class="contact__input" required>
+                        <textarea name="" id="" cols="0" rows="10" class="contact__input" required></textarea>
+                        <input type="submit"  value="submit" class="contact__button button">
+                    </form> -->
                 </div>
             </section>
         </main>
@@ -390,5 +397,41 @@
                 autoInsertCss: true,
             });
         </script>
+        <!-- ====Script for submit data==== -->
+        <script>
+            const form = document.getElementById("form");
+      
+            window.addEventListener("load", () => {
+              const form = document.getElementById("form");
+              form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const formData = new FormData(form);
+      
+                const output = document.getElementById("output");
+                let data = `{`;
+                for (const [key, value] of formData) {
+                  data += `"${key}": "${value}",`;
+                }
+                data = data.slice(0, data.length - 1);
+                data += `}`;
+                console.log("data", data);
+                const fdata = JSON.parse(data);
+                console.log("final data", fdata);
+                
+                axios({
+                    method: "post",
+                    url: "https://databasehandel.herokuapp.com/users",
+                    data: fdata,
+                }).then((res) => {
+                    alert('i will contact you as soon as possible');
+                    location.reload(); 
+                    console.log(res);
+                }).catch((err) => {
+                        // throw err;
+                        alert('Somthing is in problem');
+                });
+              });
+            });
+          </script>
     </body>
 </html>
