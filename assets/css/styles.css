@@ -222,15 +222,13 @@ img{
   max-height: 700px;
   row-gap: 1rem;
   border-radius: 10px;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
+  overflow: hidden;
 }
 
 .home__full{
   padding: 10px;
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
   height: 100%;
 }
 
@@ -557,7 +555,7 @@ img{
     width: 380px;
   }
   .home{
-    height:420px;
+    height:420px !important;
   }
   .work__img{
     height: auto;
