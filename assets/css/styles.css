@@ -521,6 +521,7 @@ img{
   width: auto;
   transition: .4s;
   z-index:-100;
+  display: none;
 }
 .scrolltop_icon{
   /* display: none; */
@@ -530,7 +531,7 @@ img{
 .show-scroll{
   z-index: 100;
   background-color: var(--third-color);
-  /* bottom:2rem ; */
+  display: block !important;
 }
 
 /* ===== MEDIA QUERIES=====*/
